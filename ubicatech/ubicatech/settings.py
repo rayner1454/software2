@@ -58,12 +58,12 @@ USE_TZ = True
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
 # La siguiente linea permite la subida de imagenes la cual esta direccionada a la carpeta de cargas
-MEDIA_ROOT = os.path.join(RUTA_PROYECTO, 'carga')
+MEDIA_ROOT = os.path.join(RUTA_PROYECTO, 'media').replace('\\','/')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://example.com/media/", "http://media.example.com/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -134,6 +134,8 @@ INSTALLED_APPS = (
      'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    #Anadimos geoposition 
+   'geoposition',
     #Es necesario para poder hacer las migraciones 
     'south',
     #Se debe instalar la aplicacion que tendra nuestro proyecto 

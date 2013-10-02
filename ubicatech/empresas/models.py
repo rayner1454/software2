@@ -1,6 +1,10 @@
 #encododing:utf-8 <-Permite usar tildes y caracteres
 
+
 from django.db import models
+
+# Importamos geoposition para ubicar las sucursales de las empresas sobre un mapa de Google Maps
+from geoposition.fields import GeopositionField
 # Es aqui donde definimos el modelo que tendra esta aplicacion 
 #Un modelo es la representacion de los datos de nuestra aplicacion
 #Contiene los campos  basicos y el comportamiento de los datos que seran almacenados
@@ -20,7 +24,9 @@ class Empresario(models.Model):
 	nacionalidad = models.CharField(max_length=50)
 
 	def __unicode__(self):
-		return self.nombre
+		#Primero concatenamos para obtener el nombre completo de de una persona
+		nombrecompleto = "%s %s %s"%(self.nombre, self.paterno, self.materno)
+		return nombrecompleto
 
 #La siguiente clase almacena los tipos de cobro que se tendran, es decir define esta clase
 #los diferentes precios de servicio para las empresas.
@@ -54,8 +60,8 @@ class Empresa(models.Model):
 class Sucursal(models.Model):
 	cod_empresa = models.ForeignKey(Empresa)
 	direccion = models.CharField(max_length=100)
-	latitud = models.CharField(max_length=10)
-	longitud = models.CharField(max_length=10)
+	Ubicacion = GeopositionField()
+	
     
 	def  __unicode__(self):
 		return "%s"%(self.id)
