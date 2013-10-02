@@ -2,6 +2,8 @@ from django.conf.urls import patterns, include, url
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+# Es importante declarar esta linea para la subida de imagenes 
+# ademas puedan ser visualizadas 
 from django.conf import settings
 admin.autodiscover()
 
@@ -18,6 +20,9 @@ urlpatterns = patterns('',
     
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    # Es importante esta linea de codigo porque sin esta linea de codigo no se podran visualizar las imagenes
+    # ademas que tiene la opcion para que se direccion correctamente hasta la ubicacion de la imagen
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes': False}),
+    # La siguiente linea de codigo sirve para incluir las opciones del Editor de Texto con opciones parecdidas a Word
     (r'^ckeditor/', include('ckeditor.urls')),
 )

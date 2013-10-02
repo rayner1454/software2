@@ -11,6 +11,17 @@ from geoposition.fields import GeopositionField
 
 # Importamos el CKEditor para Modificar
 from ckeditor.fields import RichTextField
+
+# Importamos el CountryField para usar en los campos
+from django_countries import CountryField
+
+#Primeramente  creamos las opciones de Genero 
+GENERO_CHOICES = (
+    ('F', 'Femenino'),
+    ('M', 'Masculino'),
+    )
+
+
 # A continacion creamos la clase Empresario, donde definimos los campos que tendra.
 
 class Empresario(models.Model):
@@ -22,8 +33,10 @@ class Empresario(models.Model):
 	password = models.CharField(max_length=50)
 	correo_electronico = models.EmailField(max_length=75)
 	celular = models.CharField(max_length=50)
-	sexo = models.CharField(max_length=15)
-	nacionalidad = models.CharField(max_length=50)
+	#Declaramos nuestra funcion con las opciones declaradas en GENERO_CHOICES
+	sexo = models.CharField(max_length=15, choices=GENERO_CHOICES)
+	#Declaramos Countryfield para obtener los paises
+	nacionalidad = CountryField()
 
 	def __unicode__(self):
 		#Primero concatenamos para obtener el nombre completo de de una persona
@@ -35,6 +48,7 @@ class Empresario(models.Model):
 class  Tipo_de_cobro(models.Model):
 	cod_tipo_cobro = models.CharField(max_length=50)
 	tipo_cobro = models.CharField(max_length=50)
+	#Declaramos a la descrion como RichTextField para que se vean las opciones de Word
 	descripcion = RichTextField()
 
 	def __unicode__(self):
@@ -62,6 +76,7 @@ class Empresa(models.Model):
 class Sucursal(models.Model):
 	cod_empresa = models.ForeignKey(Empresa)
 	direccion = models.CharField(max_length=100)
+	# Declaramos este campo para colocar seleccionar en el mapa de Google Maps la ubicacion de 
 	Ubicacion = GeopositionField()
 	
     
@@ -85,7 +100,7 @@ class Pagos(models.Model):
 	cod_tipo_cobro = models.ForeignKey(Empresa)
 	tipo_pago = models.ForeignKey(Tipo_de_pago)
 	monto_cancelado = models.FloatField()
-	saldo = models.FloatField()
+	saldo = models.FloatField(default=0)
 
 	def __unicode__(self):
 		return self.cod_empresa
@@ -98,7 +113,7 @@ class Actividad(models.Model):
 	cod_empresa = models.ForeignKey(Empresa)
 	#descripcion = models.TextField()
 	descripcion = RichTextField()
-	precio_entrada = models.FloatField()
+	precio_entrada = models.FloatField(default=0)
 	frase_del_dia = RichTextField()
 	evento_principal = RichTextField()
 	imagen = models.ImageField(upload_to ='empresa', verbose_name='Foto') # Provicionalmente esta la direccion de esta carpeta
@@ -128,8 +143,8 @@ class Usuario(models.Model):
 	imagen = models.ImageField(upload_to ='empresa', verbose_name='Foto') # Provicionalmente esta la direccion de esta carpeta
 	intereses = RichTextField()
 	correo_electronico = models.EmailField(max_length=75)
-	sexo = models.CharField(max_length=20)
-	nacionalidad = models.CharField(max_length=50)
+	sexo = models.CharField(max_length=20, choices=GENERO_CHOICES)
+	nacionalidad = CountryField()
 
 	def __unicode__(self):
 		return self.nombre

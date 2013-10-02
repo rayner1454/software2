@@ -57,12 +57,13 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-# La siguiente linea permite la subida de imagenes la cual esta direccionada a la carpeta de cargas
+# La siguiente linea permite la subida de imagenes la cual esta direccionada a la carpeta de cargas, es importante que se copie tal como esta para evitarse problemas 
 MEDIA_ROOT = os.path.join(RUTA_PROYECTO, 'media').replace('\\','/')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://example.com/media/", "http://media.example.com/"
+# la siguiente linea de codigo permite que las imagenes se direccionen hacia la carpeta media donde se deben almacenar nuestras imagenes
 MEDIA_URL = '/media/'
 
 # Absolute path to the directory static files should be collected to.
@@ -120,6 +121,7 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
+# Es importante anadir las siguientes 2 lineas de codigo para utilizar el editor de texto
 CKEDITOR_MEDIA_PREFIX = "/static/ckeditor/" #copiar ``media/ckeditor``
 CKEDITOR_UPLOAD_PATH = "/media/"# Subir archivos
 
