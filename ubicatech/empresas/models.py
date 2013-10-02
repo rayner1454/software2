@@ -9,6 +9,8 @@ from geoposition.fields import GeopositionField
 #Un modelo es la representacion de los datos de nuestra aplicacion
 #Contiene los campos  basicos y el comportamiento de los datos que seran almacenados
 
+# Importamos el CKEditor para Modificar
+from ckeditor.fields import RichTextField
 # A continacion creamos la clase Empresario, donde definimos los campos que tendra.
 
 class Empresario(models.Model):
@@ -33,7 +35,7 @@ class Empresario(models.Model):
 class  Tipo_de_cobro(models.Model):
 	cod_tipo_cobro = models.CharField(max_length=50)
 	tipo_cobro = models.CharField(max_length=50)
-	descripcion = models.TextField()
+	descripcion = RichTextField()
 
 	def __unicode__(self):
 		return self.tipo_cobro
@@ -94,10 +96,11 @@ class Pagos(models.Model):
 
 class Actividad(models.Model):
 	cod_empresa = models.ForeignKey(Empresa)
-	descripcion = models.TextField()
+	#descripcion = models.TextField()
+	descripcion = RichTextField()
 	precio_entrada = models.FloatField()
-	frase_del_dia = models.TextField()
-	evento_principal = models.TextField()
+	frase_del_dia = RichTextField()
+	evento_principal = RichTextField()
 	imagen = models.ImageField(upload_to ='empresa', verbose_name='Foto') # Provicionalmente esta la direccion de esta carpeta
 	horario_de_atencion = models.CharField(max_length=100)
 	fecha_de_actividad = models.DateField()
@@ -109,7 +112,7 @@ class Actividad(models.Model):
 #OJO revisar la siguiente clase del estado de cuenta
 class Estado_de_Cuenta(models.Model):
 	cod_empresa = models.ForeignKey(Empresa)
-	descripcion = models.TextField()
+	descripcion = RichTextField()
 
 	def __unicode__(self):
 		return self.cod_empresa
@@ -123,7 +126,7 @@ class Usuario(models.Model):
 	paterno = models.CharField(max_length=50)
 	materno = models.CharField(max_length=50)
 	imagen = models.ImageField(upload_to ='empresa', verbose_name='Foto') # Provicionalmente esta la direccion de esta carpeta
-	intereses = models.TextField()
+	intereses = RichTextField()
 	correo_electronico = models.EmailField(max_length=75)
 	sexo = models.CharField(max_length=20)
 	nacionalidad = models.CharField(max_length=50)
@@ -135,7 +138,7 @@ class Usuario(models.Model):
 class Comentario(models.Model):
 	cod_empresa= models.ForeignKey(Empresa)
 	ci = models.ForeignKey(Usuario)
-	comentario = models.TextField()
+	comentario = RichTextField()
 
 	def __unicode__(self):
 		return self.comentario
@@ -146,7 +149,7 @@ class Comentario(models.Model):
 class Puntaje(models.Model):
 	cod_empresa= models.ForeignKey(Empresa)
 	ci = models.ForeignKey(Usuario)
-	puntaje = models.IntegerField()
+	puntaje = models.IntegerField(default=0)
 
 	def __unicode__(self):
 		return self.puntaje
@@ -157,7 +160,7 @@ class Visita(models.Model):
 	cod_empresa= models.ForeignKey(Empresa)
 	ci = models.ForeignKey(Usuario)
 	fecha = models.DateField()
-	observaciones = models.TextField()
+	observaciones = RichTextField()
 
 
 

@@ -120,6 +120,8 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
+CKEDITOR_MEDIA_PREFIX = "/static/ckeditor/" #copiar ``media/ckeditor``
+CKEDITOR_UPLOAD_PATH = "/media/"# Subir archivos
 
 INSTALLED_APPS = (
     #Instalamos a continuacion Grappelli
@@ -138,6 +140,8 @@ INSTALLED_APPS = (
    'geoposition',
     #Es necesario para poder hacer las migraciones 
     'south',
+    #A continuacion instalamos el CKEditor para hacer el textfield tipo word 
+    'ckeditor',
     #Se debe instalar la aplicacion que tendra nuestro proyecto 
     'empresas'
 )
