@@ -5,9 +5,20 @@ from django.contrib import admin
 # Es importante declarar esta linea para la subida de imagenes 
 # ademas puedan ser visualizadas 
 from django.conf import settings
+#Importamos el Rest
+from rest_framework import routers 
+from empresas import views
+
+router = routers.DefaultRouter()
+router.register(r'users',views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
+router.register(r'empresa', views.EmpresaViewSet)
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
+     url(r'^', include(router.urls)),
+     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # Examples:
     # url(r'^$', 'ubicatech.views.home', name='home'),
     # url(r'^ubicatech/', include('ubicatech.foo.urls')),

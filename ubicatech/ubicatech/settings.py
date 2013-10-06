@@ -142,11 +142,17 @@ INSTALLED_APPS = (
    'geoposition',
     #Es necesario para poder hacer las migraciones 
     'south',
+    #Agregamos el modulo de rest para poder crear los webservices
+    'rest_framework',
     #A continuacion instalamos el CKEditor para hacer el textfield tipo word 
     'ckeditor',
     #Se debe instalar la aplicacion que tendra nuestro proyecto 
     'empresas'
 )
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'PAGINATE_BY': 10
+}
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
