@@ -17,11 +17,11 @@ router.register(r'empresa', views.EmpresaViewSet)
 admin.autodiscover()
 
 urlpatterns = patterns('',
-     url(r'^$','empresas.views.agregar_tipo_cobro'),
-
+     url(r'^api-auth/', include(router.urls)),
      url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # Examples:
-    #url(r'^$', 'empresas.views.home_page', name='home'),
+    # Ejemplo para el frontend con la vista 
+    url(r'^$', 'empresas.views.agregar_tipo_cobro', name='home'),
     # url(r'^ubicatech/', include('ubicatech.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
