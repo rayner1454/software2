@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	{{ formulario.media }}
+	<form method="POST" enctype="multipart/form-data">
+    <table class="table">
+        {% csrf_token %}
+        {% for field in formulario %}
+        <tr>
+            <td>{{field.label}}</td>
+            <td>{{field}}</td>
+        </tr>
+        {% endfor %}
+        
+        <tr>
+            <th colspan="2"><input type="submit" value=" R E G I S T R A R " class ="boton"></td>
+        </tr>
+    </table>       
+</form>
+</body>
+</html>

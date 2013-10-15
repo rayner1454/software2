@@ -74,14 +74,14 @@ class Empresa(models.Model):
 # La siguiente clase declara la ubicacion exacta de una sucursal
 # donde se toma la latitud y longitud para ubicarlo sobre un mapa de google Maps
 class Sucursal(models.Model):
-	cod_empresa = models.ForeignKey(Empresa)
+	cod_empresa = models.ForeignKey(Empresa, related_name='sucursales')
 	direccion = models.CharField(max_length=100)
 	# Declaramos este campo para colocar seleccionar en el mapa de Google Maps la ubicacion de 
 	Ubicacion = GeopositionField()
 	
     
 	def  __unicode__(self):
-		return "%s"%(self.id)
+		return "%s"%(self.direccion)
 # A continuacion declaramos los tipos de pagos, es decir las maneras para pagar ya sea
 # con paypal y Cuenta de Banco
 

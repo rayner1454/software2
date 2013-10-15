@@ -3,7 +3,7 @@
 #Primero importamos los 2 modelos
 from django.contrib.auth.models import User, Group
 
-from empresas.models import Empresa
+from empresas.models import Empresa, Sucursal
 from rest_framework import serializers 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -17,8 +17,14 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 		fields = ('url', 'name')
 
 #Creamos el serializador para la empresa 
-
+# Para ello creamos los serializadores de las sucurusales
+class SucursalSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Sucursal
+		fields = ('direccion','Ubicacion')
+#Luego creamos el serializador para las empresas incorporando las sucursales
 class EmpresaSerializer(serializers.ModelSerializer):
+	sucursales = SucursalSerializer(many=True)
 	class Meta:
 		model = Empresa
-		#fields = ('nombre','ubicacion','imagen','servicios','proposito','fecha_registro','telefono','cantidad_sucursales')
+		fields = ('cod_empresa','nombre','sucursales')
